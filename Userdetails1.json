@@ -1,0 +1,24 @@
+{
+   "Deep@123": {
+      "Username": "qwertyu",
+      "Password": "Deep@123",
+      "Profile": {
+         "Description: ": "qwert",
+         "Birthdate: ": "jhgfd",
+         "Hobbies: ": "gfds",
+         "Gender": "bvcx"
+      }
+   },
+   "Man@123": {
+      "Description: ": "mnbvc",
+      "Birthdate: ": "jhgfd",
+      "Hobbies: ": "uytr",
+      "Gender": "bvcfd"
+   },
+   "Xsza@123": {
+      "Description: ": "jhgfds",
+      "Birthdate: ": "jhgfd",
+      "Hobbies: ": "mnbvc",
+      "Gender": "uytr"
+   }
+}
