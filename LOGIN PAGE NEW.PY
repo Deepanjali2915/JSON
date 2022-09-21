@@ -1,52 +1,70 @@
-import os.path
 import json
+import os
 import re
-user=input("WHAT DO YOU WANT\nLOGIN AND SIGNUP")
-existsfile=os.path.exists("new.json")
+
+print("!WEL COME TO SIGN UP! ")
+file=os.path.exists("signup.json")
+if file==False:
+    l=[]
+    with open("signup.json","a")as f:
+        a=json.dump(l,f,indent=4)
+#         print(a)
+user=input("what you want to login or signup:-")
 if user=="signup":
-    name=input("Enter the name: ")
-    
-        
-    pattern = "^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
-    password = input("Enter a password: ")
-    result = re.findall(pattern, password)
-    listt=[]
-    dictt={}
+        name=input("enter the firstNAME:-")
+        sname=input("enter the lastNAME:-")
+        t=open("signup.json","r")
+        n2=t.read()
+        # print(n2)
+        if name not in n2:
+            print("create a strong password mix of letter number and symbols")
+            def pasw():
+                p=input("enter the strong password:=")
+                if (re.search("[a-z A-Z]",p)and (re.search("[0-9]",p))and (re.search("[@#$&]",p))):
+                    if len(p)>=8:
+                        con_p=input("Enter the confirm password:")
+                        if p==con_p:
+                            print("coorect password")
+                            bod=(input("enter the birth date:-"))
+                            emali=input("enter the email ID:-")
+                            g=input("enter the gender male or female:-")
+                            print(name,"signup is succesfully")
+                            dic={'name':name,"Password":p,"DOB":bod,"Gender":g,"gmail":emali}
+                            with open("signup.json","r")as f:
+                                data=json.load(f)
+                            data.append(dic)
+                            with open("signup.json","w") as f:
+                                json.dump(data,f,indent=4)
+                        else:
+                            print("incrroct password")
+                            pasw()
+                    else:
+                        print("len is wrong")
+                        pasw()
+                else:
+                    print("check mix of letter number and symbols")
+                    pasw()
+            pasw()
+        else:
+            print("Name is already their")
 
-    if (result):
-        # print ("Valid password")
-        confirm=input("Re enter the password")
-
-
-        if password==confirm:
-            print("Your password will be create")
-            print("NOW!!!!\n you give some detilas")
-            gender=input("Enter the gender:female or male: ")
-            state=input("Enter the state: ")
-            number=int(input("Enter the Contact number: "))
-            Qualifeacation=input("Enter the qualifacation: ")
-            hobby=input("Wnat your Hobbies\n any TWO: ")
-            A={"name":name,"Gender":gender,"Number":number,"Qualifeacation":Qualifeacation,"hobby":hobby}
-            if existsfile==True:
-                listt.append(A)
-                dictt.update({password:listt})
-                with open("new.json","a")as file:
-                    json.dump(dictt,file,indent=4)
-    else:
-        print("Wrong password please try again")
-# if user=="login":
-#     login=input("Enter the user name: ")
-#     if existsfile==True:
-#         password=input ("Enter user pasword: ")
-#         with open("new.json","r")as file:
-#             a=file.read()
-#             d=json.loads(a)
-#             for i in range(len(d)):
-#                 if d[i]["name"]==name:
-#                     print("login successful")
-#                 elif i==len(d)-1 and d[i]["name"]!=name:
-#                     print("Opsss!! wrong password")
-#     else:
-#         print("oppss!! wrong details") 
-# # else:
-#     # print("Sorry!! Please try again: ")
+elif user=="login":
+    user_name=input("enter the NAME:-")
+    idpass=input("enter the PASSWORD:-")
+    with open("signup.json","r")as f:
+        d=json.load(f)
+        # print(d)
+        for i in range(len(d)):
+            if d[i]["name"]==user_name:
+                if d[i]["Password"]==idpass:
+                    print("! LOGIN SUCCESSFULY !")
+                    print("your name is",d[i]["name"],"\n")
+                    print("and your data is :-\n")
+                    for x,y in d[i].items():
+                        print(x,'=',y)   
+                else:
+                    print("incorrect PASSWORD")
+                    break   
+        else:
+            print("pleace check ")
+ 
